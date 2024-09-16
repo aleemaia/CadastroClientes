@@ -1,2 +1,2 @@
 # CadastroClientes
-Um projeto para cadastrar informações de clientes
+Um projeto de aprendizado para cadastrar informações de clientes
