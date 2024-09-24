@@ -1,5 +1,6 @@
 ﻿using CadastroClientes.Data;
 using CadastroClientes.Models;
+using CadastroClientes.Services.SessaoService;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -9,13 +10,18 @@ namespace CadastroClientes.Controllers
     public class ClientesController : Controller
     {
         readonly private CadastroClientesDbContext _db;
-        public ClientesController(CadastroClientesDbContext db)
+        readonly private ISessaoInterface _sessaoInterface;
+        public ClientesController(CadastroClientesDbContext db, ISessaoInterface sessaoInterface)
         {
             _db = db;
+            _sessaoInterface = sessaoInterface;
         }
 
         public IActionResult Index()
         {
+            var usuario = _sessaoInterface.BuscarSessao();
+            if (usuario == null) return RedirectToAction("Login", "Login");
+
             IEnumerable<ClientesModel> clientes = _db.Clientes;
 
             return View(clientes);
@@ -24,12 +30,17 @@ namespace CadastroClientes.Controllers
         [HttpGet]
         public IActionResult Cadastrar()
         {
+            var usuario = _sessaoInterface.BuscarSessao();
+            if (usuario == null) return RedirectToAction("Login", "Login");
+
             return View();
         }
 
         [HttpGet]
         public IActionResult Editar(int? id) 
         {
+            var usuario = _sessaoInterface.BuscarSessao();
+            if (usuario == null) return RedirectToAction("Login", "Login");
             if (id == null || id == 0) return NotFound();
             
             ClientesModel cliente = _db.Clientes.FirstOrDefault(x => x.Id == id);
@@ -42,6 +53,9 @@ namespace CadastroClientes.Controllers
         [HttpGet]
         public IActionResult Excluir(int? id)
         {
+            var usuario = _sessaoInterface.BuscarSessao();
+            if (usuario == null) return RedirectToAction("Login", "Login");
+
             if (id == null || id == 0) return NotFound();
 
             ClientesModel cliente = _db.Clientes.FirstOrDefault(x => x.Id == id);
@@ -112,6 +126,8 @@ namespace CadastroClientes.Controllers
                 _db.Clientes.Add(clientes);
                 _db.SaveChanges();
 
+                TempData["MensagemSucesso"] = "Cadastro realizado com sucesso!";
+
                 return RedirectToAction("Index");
             }
             return View();
@@ -124,6 +140,8 @@ namespace CadastroClientes.Controllers
             {
                 _db.Clientes.Update(cliente);
                 _db.SaveChanges();
+
+                TempData["MensagemSucesso"] = "Edição realizada com sucesso!";
 
                 return RedirectToAction("Index");
             }

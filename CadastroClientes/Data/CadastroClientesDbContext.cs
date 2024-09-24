@@ -10,5 +10,6 @@ namespace CadastroClientes.Data
         }
 
         public DbSet<ClientesModel> Clientes { get; set; }
+        public DbSet<UsuarioModel> Usuarios {  get; set; }
     }
 }

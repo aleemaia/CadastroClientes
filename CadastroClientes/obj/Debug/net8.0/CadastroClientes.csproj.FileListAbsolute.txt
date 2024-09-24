@@ -141,3 +141,5 @@ G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClien
 G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClientes\bin\Debug\net8.0\SixLabors.Fonts.dll
 G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClientes\bin\Debug\net8.0\System.IO.Packaging.dll
 G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClientes\bin\Debug\net8.0\XLParser.dll
+G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClientes\obj\Debug\net8.0\CadastroClientes.sourcelink.json
+G:\Cursos\Projetos para o GitHub\CadastroClientes\CadastroClientes\CadastroClientes\bin\Debug\net8.0\Newtonsoft.Json.dll
